@@ -39,5 +39,16 @@ int main(){
 
     disable_raw_mode();
 
+    close(vcpu.fd);
+    close(vm.fd);
+    close(vm.sys_fd);
+
+    if (munmap(vcpu.run, vcpu.run_size) == -1){
+        perror("KVM RUN MUNMAP FAILED");
+    }
+    if (munmap(vm.mem, vm.mem_size) == -1){
+        perror("VM MEM MUNMAP FAILED");
+    }
+
     return 0;
 }

@@ -90,8 +90,8 @@ int vcpu_init(struct vm* vm, struct vcpu* vcpu){
     }
 
 
-    int run_size = ioctl(vm->sys_fd, KVM_GET_VCPU_MMAP_SIZE, 0);
-    vcpu->run = mmap(NULL, run_size, PROT_READ | PROT_WRITE, MAP_SHARED, vcpu->fd, 0);
+    vcpu->run_size = ioctl(vm->sys_fd, KVM_GET_VCPU_MMAP_SIZE, 0);
+    vcpu->run = mmap(NULL, vcpu->run_size, PROT_READ | PROT_WRITE, MAP_SHARED, vcpu->fd, 0);
     if (vcpu->run == MAP_FAILED){
         printf("VCPU run map failed\n");
         return -1;

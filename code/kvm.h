@@ -25,6 +25,7 @@ struct vm {
 
 struct vcpu {
     int fd;
+    int run_size;
     struct kvm_run* run;
 };
 
